@@ -41,7 +41,7 @@ class Productos(models.Model):
     nombreProducto=models.CharField(max_length=35)
     descripcion=models.CharField(max_length=50)
     precio=models.FloatField()
-    imagen = models.ImageField(upload_to='imagenes', null=True )
+    imagen = models.ImageField(upload_to='imagenesT', null=True )
     
     class Meta:
         verbose_name='Producto'

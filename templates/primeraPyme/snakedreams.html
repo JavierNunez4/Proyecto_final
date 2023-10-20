@@ -6,5 +6,20 @@
 
 
 {% block content %}
-
+<div>
+    {% for producto in productos %}
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">{{ producto.nombreProducto }}</h5>
+            <p class="card-text">{{ producto.descripcion }}</p>
+            <p class="card-text">Precio: {{ producto.precio }}</p>
+            {% if producto.imagen %}
+            <img src="{{ producto.imagen.url }}" alt="Imagen del producto" style="max-width: 100px; max-height: 100px;">
+            {% else %}
+            <p>No hay imagen disponible</p>
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+</div>
 {% endblock  %}

@@ -1,0 +1,27 @@
+{% extends "base/base.html" %}
+
+{% block content %}
+<h1 class="ms-5">Agregar Producto</h1>
+<div class="container">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div>
+            <label for="id_nombreProducto">Nombre del Producto:</label>
+            {{ form.nombreProducto }}
+        </div>
+        <div>
+            <label for="id_descripcion">Descripción:</label>
+            {{ form.descripcion }}
+        </div>
+        <div>
+            <label for="id_precio">Precio:</label>
+            {{ form.precio }}
+        </div>
+        <div>
+            <label for="id_imagen">Imagen:</label>
+            {{ form.imagen }}
+        </div>
+        <input type="submit" value="Guardar">
+    </form>
+</div>
+{% endblock content %}
