@@ -6,22 +6,27 @@
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div>
-            <label for="id_nombreProducto">Nombre del Producto:</label>
+            <label for="id_nombreProducto" class="col-form-label">Nombre del Producto:</label>
             {{ form.nombreProducto }}
         </div>
         <div>
-            <label for="id_descripcion">Descripción:</label>
+            <label for="id_descripcion" class="col-form-label">Descripción:</label>
             {{ form.descripcion }}
         </div>
         <div>
-            <label for="id_precio">Precio:</label>
+            <label for="id_precio" class="col-form-label">Precio:</label>
             {{ form.precio }}
         </div>
         <div>
             <label for="id_imagen">Imagen:</label>
             {{ form.imagen }}
         </div>
-        <input type="submit" value="Guardar">
+        <div class="modal-footer">
+        <Button class="btn btn-primary" type="button submit" >Guardar</Button>
+        </div>
     </form>
+    <br>
+    <a class="btn btn-primary" href="/snakedreams">Volver</a>
 </div>
+
 {% endblock content %}

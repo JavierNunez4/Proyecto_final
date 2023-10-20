@@ -6,20 +6,25 @@
 
 
 {% block content %}
-<div>
+<div class="row">
     {% for producto in productos %}
-    <div class="card">
+    <div class="col-md-3">
+    <div class="card" style="width: 15rem;">
+        {% if producto.imagen %}
+    <img class="card-img-top " src="{{ producto.imagen.url }}" width="18rem"  height="250rem" alt="Imagen del producto">
+    {% else %}
+            <p>No hay imagen disponible</p>
+            {% endif %}
         <div class="card-body">
             <h5 class="card-title">{{ producto.nombreProducto }}</h5>
             <p class="card-text">{{ producto.descripcion }}</p>
-            <p class="card-text">Precio: {{ producto.precio }}</p>
-            {% if producto.imagen %}
-            <img src="{{ producto.imagen.url }}" alt="Imagen del producto" style="max-width: 100px; max-height: 100px;">
-            {% else %}
-            <p>No hay imagen disponible</p>
-            {% endif %}
+            <p class="card-text">Precio: {{ producto.precio }}</p> 
         </div>
     </div>
+</div>
     {% endfor %}
+</div>
+<div class="modal-footer" >
+<a class="btn btn-primary" href="crear">Agregar un Producto</a>
 </div>
 {% endblock  %}

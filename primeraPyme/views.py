@@ -3,6 +3,7 @@ from .forms import ProductoFrom
 from django.views.generic import View
 from django.http import HttpResponseRedirect
 from mainPage.models import Productos
+from django.urls import reverse
 
 # Create your views here.
 
@@ -25,4 +26,4 @@ class GuardarProducto(View):
         form = ProductoFrom(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reversed('snakedreams.html'))
+            return HttpResponseRedirect(reverse('pyme1'))
