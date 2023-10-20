@@ -73,13 +73,14 @@
       </div>
       <!-- Fin del sidebar-->
 
-    {% block content %}
+    
      <main class="container">
+      {% block content %}
         <!-- Aqui el contenido de la Pagina-->
 
-
+        {%endblock%}
      </main>
-     {%endblock%}
+     
 
     <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
     <script src="{% static 'js/sidebars.js' %}"></script>

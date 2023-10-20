@@ -1,4 +1,14 @@
 {% extends "base/base.html" %}
+{% load static %}
 
 {%block title%}<h1>Pyme's</h1>{%endblock%}
 
+{%block content%}
+<div class="card">
+<a href="snakedreams/">
+<img  src="{% static img %}">
+</a>
+<p>Snake Dreams</p>
+</div>
+
+{%endblock%}

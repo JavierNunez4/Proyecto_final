@@ -1,10 +1,8 @@
 from django.shortcuts import render
-from templates import *
 
 # Create your views here.
 
 
-def main(request):
+def pyme1(request):
     data = {"img":"imagenes\logo_pyme.jpg"}
-    return render(request, "mainPage/main.html", data)
-
+    return render(request, "primeraPyme/snakedreams.html",data)
