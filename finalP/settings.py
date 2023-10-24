@@ -138,6 +138,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'mainPage.Usuarios'
 
-MEDIA_ROOT = BASE_DIR / "imagenesTienda"
 
+#imagenes guardadas al subirlas
+MEDIA_ROOT = BASE_DIR / "imagenesTienda"
 MEDIA_URL = "/media-imagenesTienda/"
+
+
+#configuracion en la rutas y direcciones del proyecto
+SITE_ID = 1
+LOGIN_REDIRECT_URL = '/account/'

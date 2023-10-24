@@ -1,0 +1,23 @@
+{% extends "base/base.html" %}
+
+{% block title %}
+<h1>Mi Cuenta</h1>
+{% endblock  %}
+
+
+{% block content %}
+<div>
+<h1>Nombre</h1>
+<h5>{{nombre}}</h5>
+
+<h1>Apellido</h1>
+<h5>{{apellido}}</h5>
+
+<h1>Email</h1>
+<h5>{{email}}</h5>
+</div>
+
+<div class="modal-footer" >
+    <a class="btn btn-primary" href="/logout">Salir</a>
+    </div>
+{% endblock  %}
