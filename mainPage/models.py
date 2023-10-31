@@ -13,12 +13,28 @@ class Usuarios(AbstractUser):
 class Propietarios(models.Model):
     datosPropietario = models.ForeignKey(Usuarios, on_delete=models.CASCADE)
     nombrePyme = models.CharField(max_length=30)
-    
+        
+        
     class Meta:
         verbose_name='Propietario'
         verbose_name_plural='Propietarios'
         db_table='propietarios'
+
+
     
+class Solicitudes(models.Model):
+    
+    fecha_de_solicitud = models.DateField(auto_now_add=True, null=True)
+    nombre = models.CharField(max_length=20)
+    apellidos = models.CharField(max_length=60)
+    nombrePyme = models.CharField(max_length=100)
+    solicitud = models.CharField(max_length=500)
+    imagen = models.ImageField(upload_to='logoPymes', null=True)
+    
+    class Meta:
+        verbose_name='Solicitud'
+        verbose_name_plural='Solicitudes'
+        db_table='solicitudes'
 
 class Pymes(models.Model):
     
@@ -26,6 +42,10 @@ class Pymes(models.Model):
     direccion = models.CharField(max_length=60)
     categoria = models.CharField(max_length=20)
     propietario= models.ForeignKey(Propietarios,null=True,on_delete=models.CASCADE)
+    logo = models.ForeignKey(Solicitudes, null=True, on_delete=models.CASCADE)
+    
+    def get_img_url(self):
+        return self.logo.imagen.url
     
     class Meta:
         verbose_name='Pymes'
@@ -39,7 +59,7 @@ class Productos(models.Model):
     
     pymeAsociada= models.ForeignKey(Pymes,null=True, blank=True, on_delete=models.RESTRICT)
     nombreProducto=models.CharField(max_length=35)
-    descripcion=models.CharField(max_length=50)
+    descripcion=models.CharField(max_length=150)
     precio=models.FloatField()
     imagen = models.ImageField(upload_to='imagenesT', null=True )
     
@@ -47,4 +67,5 @@ class Productos(models.Model):
         verbose_name='Producto'
         verbose_name_plural='Productos'
         db_table='productos'
+    
     

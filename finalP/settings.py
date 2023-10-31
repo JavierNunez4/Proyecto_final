@@ -82,7 +82,7 @@ WSGI_APPLICATION = 'finalP.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'dj_pruebas',        # Nombre de tu base de datos MySQL
+        'NAME': 'pruebas_dj',        # Nombre de tu base de datos MySQL
         'USER': 'admin_django',            # Nombre de usuario de MySQL
         'PASSWORD': '1234',    # Contraseña de MySQL
         'HOST': 'localhost',         # Host donde se ejecuta MySQL (generalmente 'localhost' en desarrollo)

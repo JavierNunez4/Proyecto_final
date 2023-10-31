@@ -1,9 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .forms import ProductoFrom
 from django.views.generic import View
 from django.http import HttpResponseRedirect
 from mainPage.models import Productos
 from django.urls import reverse
+
 
 # Create your views here.
 
@@ -27,3 +28,11 @@ class GuardarProducto(View):
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(reverse('pyme1'))
+        
+        
+
+
+def detalles(request, pk):
+    producto = get_object_or_404(Productos, pk=pk)
+   
+    return render(request, "primeraPyme/producto.html", {'producto': producto})

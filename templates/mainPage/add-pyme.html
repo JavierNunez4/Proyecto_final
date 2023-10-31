@@ -1,0 +1,15 @@
+{% extends "base/base.html" %}
+
+{% block title %}
+<h1>Solicitud para Añadir Tu Pyme</h1>
+{% endblock  %}
+
+
+{% block content %}
+<form class= "form" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <button  class="btn btn-primary">Enviar</button>
+</form>
+{% endblock  %}

@@ -1,0 +1,15 @@
+{% extends "base/base.html" %}
+
+{% block title %}
+
+{% endblock  %}
+
+
+{% block content %}
+<img  src="{{ producto.imagen.url }}" width="200px"  height="200px" alt="Imagen del producto">
+<h1>{{producto.nombreProducto}}</h1>
+<h1>{{producto.descripcion}}</h1>
+<h1>{{producto.precio}}</h1>
+
+
+{% endblock  %}
