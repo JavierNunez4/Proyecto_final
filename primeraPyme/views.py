@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .forms import ProductoFrom
 from django.views.generic import View
 from django.http import HttpResponseRedirect
@@ -27,7 +27,7 @@ class GuardarProducto(View):
         form = ProductoFrom(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse('pyme1'))
+            return redirect('gestion:pyme1')
         
         
 

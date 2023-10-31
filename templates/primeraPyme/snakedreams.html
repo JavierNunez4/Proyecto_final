@@ -8,6 +8,7 @@
 {% block content %}
 <div class="row">
     {% for producto in productos %}
+    <a href="{% url 'gestion:detalle' producto.id %}" style="text-decoration: none; width:auto">
     <div class="col-md-3">
     <div class="card" style="width: 15rem;">
         {% if producto.imagen %}
@@ -22,8 +23,10 @@
         </div>
     </div>
 </div>
+</a>
     {% endfor %}
 </div>
+</a>
 <div class="modal-footer" >
 <a class="btn btn-primary" href="crear">Agregar un Producto</a>
 </div>

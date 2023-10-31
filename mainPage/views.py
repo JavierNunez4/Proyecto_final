@@ -61,3 +61,4 @@ def solicitudAdmin(request):
     soli = Solicitudes.objects.all()
     data = {'solicitudes':soli,}
     return render(request, "mainPage/solicitudes.html", data)
+
