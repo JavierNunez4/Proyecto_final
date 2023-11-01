@@ -1,5 +1,4 @@
 {% extends "base/base.html" %}
-
 {% block title %}
 <h1>Registrarse</h1>
 {% endblock  %}
@@ -7,8 +6,10 @@
 {% block content %}
     
 <form class="form" method="post"> 
+
+    
     {% csrf_token %}
-    {{form.as_p}}
+    {{form.as_p }}
 
      <button class="btn btn-primary" type="button submit">Registrar</button>
     </form>

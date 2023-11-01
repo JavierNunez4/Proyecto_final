@@ -29,7 +29,7 @@
 
 <table>
 <tr>
-    <th>id</th>
+  
     <th>fecha de solicitud</th>
     <th>nombre</th>
     <th>apellido</th>
@@ -38,12 +38,13 @@
 </tr>
 {% for soli in solicitudes  %}
     <tr>
-    <td>{{soli.id}}</td>
+  
     <td>{{soli.fecha_de_solicitud}}</td>
     <td>{{soli.nombre}}</td>
     <td>{{soli.apellidos}}</td>
     <td>{{soli.nombrePyme}}</td>
     <td>{{soli.solicitud}}</td>
+    <td><a href="{% url 'main:solidetail' soli.id %}"><button>Ver solicitud</button></a></td>
     </tr>
     
 {% endfor %}

@@ -2,6 +2,7 @@ from django.urls import path
 from . import views
 from django.contrib.auth.views import LoginView, LogoutView
 
+app_name ="main"
 urlpatterns = [
     path("", views.main, name="main"),
     path("registrar/", views.registrar, name="register"),
@@ -10,6 +11,8 @@ urlpatterns = [
     path("account/", views.cuentaUser, name="account"),
     path("solicitud/", views.solicitud, name="solicitud"),
     path("adminsolicitud/", views.solicitudAdmin, name="solicitudAdmin"),
+    path("borrar/<int:pk>", views.rechazar, name="eliminar"),
+    path("solidetail/<int:pk>", views.soliDetalles, name="solidetail"),
     
     
 ]

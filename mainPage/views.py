@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from templates import *
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
@@ -22,7 +22,7 @@ def registrar(request):
             user = form.save() 
             username = form.cleaned_data['username']
             messages.success(request, f'Usuario {username} Registrado')
-            return redirect('main')
+            return redirect('main:main')
     else:
         form = CustomUserCreationForm()
     context = {'form': form}
@@ -39,7 +39,7 @@ def cuentaUser(request):
         return render(request, 'mainPage/users.html', data)
     else:
         
-        return redirect('login')
+        return redirect('main:login')
     
     
 
@@ -49,7 +49,7 @@ def solicitud(request):
         if form.is_valid():
             soli = form.save()
             messages.success(request, f'Solicitud Enviada')
-            return redirect('main')
+            return redirect('main:main')
         
     else:
         form = AddPymeForm()
@@ -62,3 +62,14 @@ def solicitudAdmin(request):
     data = {'solicitudes':soli,}
     return render(request, "mainPage/solicitudes.html", data)
 
+def rechazar(request,pk):
+    soli = get_object_or_404(Solicitudes, pk=pk)
+    soli.delete()
+    return redirect("main:solicitudAdmin")
+
+
+
+def soliDetalles(request, pk):
+    solicitudes = get_object_or_404(Solicitudes, pk=pk)
+   
+    return render(request, "mainPage/detallesSolicitudes.html", {'soli': solicitudes})

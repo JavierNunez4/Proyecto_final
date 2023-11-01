@@ -3,13 +3,16 @@ from .models import Usuarios, Solicitudes
 from django.contrib.auth.forms import UserCreationForm
 
 class CustomUserCreationForm(UserCreationForm):
-    email = forms.EmailField()
-    password1 = forms.CharField(label='Contraseña', widget=forms.PasswordInput)
-    password2 = forms.CharField(label='Confirmar Contraseña', widget=forms.PasswordInput)
+    email = forms.EmailField(widget=forms.EmailInput(attrs={"class":"form-control"}))
+    username = forms.CharField(label='Nombre de usuario', widget=forms.TextInput(attrs={"class":"form-control"}))
+    first_name = forms.CharField(label='Nombre', widget=forms.TextInput(attrs={"class":"form-control"}))
+    last_name = forms.CharField(label='Apellidos', widget=forms.TextInput(attrs={"class":"form-control"}))
+    password1 = forms.CharField(label='Contraseña', widget=forms.PasswordInput(attrs={"class":"form-control"}))
+    password2 = forms.CharField(label='Confirmar Contraseña', widget=forms.PasswordInput(attrs={"class":"form-control"}))
     
     class Meta:
         model = Usuarios
-        fields = ['first_name','last_name',  'email', 'username',  ] 
+        fields = ['username','first_name','last_name',  'email', ] 
         help_texts = {k:"" for k in fields}
 
 
@@ -23,3 +26,5 @@ class AddPymeForm(forms.ModelForm):
     class Meta:
         model = Solicitudes
         fields = ['id','nombre','apellidos',  'nombrePyme', 'solicitud', 'imagen'] 
+        
+        
