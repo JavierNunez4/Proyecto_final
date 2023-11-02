@@ -27,6 +27,7 @@ class Solicitudes(models.Model):
     fecha_de_solicitud = models.DateField(auto_now_add=True, null=True)
     nombre = models.CharField(max_length=20)
     apellidos = models.CharField(max_length=60)
+    rut = models.IntegerField(default=0)
     nombrePyme = models.CharField(max_length=100)
     solicitud = models.CharField(max_length=500)
     imagen = models.ImageField(upload_to='logoPymes', null=True)

@@ -19,12 +19,13 @@ class CustomUserCreationForm(UserCreationForm):
 class AddPymeForm(forms.ModelForm):
     nombre = forms.CharField(label='Nombre',widget=forms.TextInput(attrs={"class":"form-control"}), max_length=35)
     apellidos = forms.CharField(label='Apellidos', widget=forms.TextInput(attrs={"class":"form-control"}), max_length=35)
+    rut = forms.CharField(label='Rut', widget=forms.NumberInput(attrs={"class":"form-control"}), max_length=9)
     nombrePyme = forms.CharField(label='Nombre de su Pyme', widget=forms.TextInput(attrs={"class":"form-control"}), max_length=35)
     solicitud = forms.CharField(label='Descripcion de solicitud' ,widget=forms.Textarea(attrs={"class":"form-control"}), max_length=250)
     imagen = forms.ImageField(label="Logo de su Pyme", required=False, widget=forms.FileInput(attrs={"class":"form-control"}))
     
     class Meta:
         model = Solicitudes
-        fields = ['id','nombre','apellidos',  'nombrePyme', 'solicitud', 'imagen'] 
+        fields = ['id','nombre','apellidos','rut',  'nombrePyme', 'solicitud', 'imagen'] 
         
         
