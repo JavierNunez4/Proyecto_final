@@ -1,20 +1,25 @@
 {% extends "base/base.html" %}
 {% load static %}
 
+{% block name %} Pymes {% endblock  %}
+
+
 {%block title%}<h1>Pyme's</h1>{%endblock%}
 
 {%block content%}
-<div class="card">
-<a href="/snakedreams">
-<img  src="{% static img %}">
-</a>
-<p>Snake Dreams</p>
-</div>
-
-
-<div class="modal-footer" >
-    <a class="btn btn-primary" href="/solicitud">Enviar Solicitud</a>
+<div class="row">
+    <div class="col-lg-3">
+        <div class="card " style="background-color: orange; width:20rem; height:31rem;">
+            <img src="{% static img %}" class="card-img-top">
+            <div class="card-body">
+                <h5 class="card-title text-center">Snake Dreams</h5>
+                <p class="card-text text-center">Tienda especializada en Ropa y Modificaciones</p>
+                <hr>
+                <a href="/snakedreams" class="btn btn-success boton-card ">Visitar</a>
+            </div>
+        </div>
     </div>
+
 
     <div class="modal-footer" >
         <a class="btn btn-primary" href="/adminsolicitud">Administrar Solicitudes</a>

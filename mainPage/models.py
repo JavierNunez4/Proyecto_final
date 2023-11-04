@@ -28,9 +28,10 @@ class Solicitudes(models.Model):
     nombre = models.CharField(max_length=20)
     apellidos = models.CharField(max_length=60)
     rut = models.IntegerField(default=0)
+    categoria = models.CharField(max_length=60, default=None)
     nombrePyme = models.CharField(max_length=100)
     solicitud = models.CharField(max_length=500)
-    imagen = models.ImageField(upload_to='logoPymes', null=True)
+    imagen = models.ImageField(upload_to='logoPymesSoli', null=True)
     
     class Meta:
         verbose_name='Solicitud'
@@ -43,7 +44,7 @@ class Pymes(models.Model):
     direccion = models.CharField(max_length=60)
     categoria = models.CharField(max_length=20)
     propietario= models.ForeignKey(Propietarios,null=True,on_delete=models.CASCADE)
-    logo = models.ForeignKey(Solicitudes, null=True, on_delete=models.CASCADE)
+    imagen = models.ImageField(upload_to='logoPymes', null=True)
     
     def get_img_url(self):
         return self.logo.imagen.url
@@ -58,7 +59,7 @@ class Pymes(models.Model):
 
 class Productos(models.Model):
     
-    pymeAsociada= models.ForeignKey(Pymes,null=True, blank=True, on_delete=models.RESTRICT)
+    pymeAsociada= models.ForeignKey(Pymes,null=True, blank=True, on_delete=models.CASCADE)
     nombreProducto=models.CharField(max_length=35)
     descripcion=models.CharField(max_length=150)
     precio=models.FloatField()

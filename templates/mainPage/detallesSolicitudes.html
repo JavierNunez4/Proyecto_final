@@ -1,5 +1,7 @@
 {% extends "base/base.html" %}
 
+{% block name %} Detalles de solicitud {% endblock  %}
+
 {% block title %}
 
 {% endblock  %}
@@ -16,5 +18,7 @@
 <h5>Solicitud: </h5>
 <p>{{soli.solicitud}}</p>
 
-<a href="{% url 'main:eliminar' soli.id %}" >Rechazar</a>
+<a href="{% url 'main:eliminar' soli.id %}" class="btn btn-danger" >Rechazar</a>
+
+<a href="{% url 'main:aceptar' soli.id %}" class="btn btn-success" >Aceptar</a>
 {% endblock  %}

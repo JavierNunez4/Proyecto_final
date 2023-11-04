@@ -1,9 +1,9 @@
 {% extends "base/base.html" %}
+{% load static %}
 
-{% block title %}
+{% block name %} producto {% endblock  %}
 
-{% endblock  %}
-
+{% block title %}<img src="{%static 'imagenes\logo_pyme.jpg' %}" height="3%" width="3%" > <h1>Snake Dreams</h1>{% endblock %}
 
 {% block content %}
 <img  src="{{ producto.imagen.url }}" width="200px"  height="200px" alt="Imagen del producto">
@@ -11,5 +11,5 @@
 <h1>{{producto.descripcion}}</h1>
 <h1>{{producto.precio}}</h1>
 
-
+<a href="/snakedreams" class="btn btn-danger">Volver</a>
 {% endblock  %}

@@ -1,11 +1,13 @@
 {% extends "base/base.html" %}
 {% load static %}
 
+{% block name %} tienda  {% endblock  %}
 
-{% block title %}<img src="{%static img%}" height="100px" width="120px" > <h1>Snake Dreams</h1>{% endblock %}
+{% block title %}<img src="{%static img%}" height="3%" width="3%" > <h1>Snake Dreams</h1>{% endblock %}
 
 
 {% block content %}
+
 <div class="row">
     {% for producto in productos %}
     <a href="{% url 'gestion:detalle' producto.id %}" style="text-decoration: none; width:auto">

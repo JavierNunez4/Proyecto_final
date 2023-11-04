@@ -2,9 +2,10 @@ from django.shortcuts import render, redirect, get_object_or_404
 from templates import *
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
-from .forms import CustomUserCreationForm, AddPymeForm
+from .forms import CustomUserCreationForm, AddPymeForm, Login
 from django.contrib.auth.decorators import login_required
 from .models import Usuarios, Pymes, Solicitudes
+from django.contrib.auth.views import LoginView
 
 # Create your views here.
 
@@ -68,8 +69,30 @@ def rechazar(request,pk):
     return redirect("main:solicitudAdmin")
 
 
+def aceptar(request,pk):
+    soli = get_object_or_404(Solicitudes, pk=pk)
+    guardar = Pymes(nombrePyme=soli.nombrePyme, categoria=soli.categoria, imagen=soli.imagen)
+    guardar.save()
+    soli.delete()
+    
+    return redirect("main:solicitudAdmin")
+
 
 def soliDetalles(request, pk):
     solicitudes = get_object_or_404(Solicitudes, pk=pk)
    
     return render(request, "mainPage/detallesSolicitudes.html", {'soli': solicitudes})
+
+
+class login(LoginView):
+    form_class = Login # Puedes personalizar el formulario de autenticación si es necesario
+    template_name = 'mainPage/login.html'  # Puedes especificar tu propia plantilla de inicio de sesión
+
+    # Aquí puedes agregar cualquier lógica personalizada que desees para el inicio de sesión
+    def form_valid(self, form):
+        # Realizar acciones personalizadas aquí si el formulario es válido
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        # Realizar acciones personalizadas aquí si el formulario es inválido
+        return super().form_invalid(form)
