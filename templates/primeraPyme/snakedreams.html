@@ -29,7 +29,11 @@
     {% endfor %}
 </div>
 </a>
+
+{% if user.rol == 2%}
 <div class="modal-footer" >
-<a class="btn btn-primary" href="crear">Agregar un Producto</a>
-</div>
+    <a class="btn btn-primary" href="crear">Agregar un Producto</a>
+    </div>
+{% endif %}
+
 {% endblock  %}

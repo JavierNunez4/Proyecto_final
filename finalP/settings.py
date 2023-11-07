@@ -147,3 +147,4 @@ MEDIA_URL = "/media-imagenesTienda/"
 #configuracion en la rutas y direcciones del proyecto
 SITE_ID = 1
 LOGIN_REDIRECT_URL = '/account/'
+

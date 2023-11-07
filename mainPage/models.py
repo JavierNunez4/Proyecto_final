@@ -2,8 +2,9 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 # Create your models here.
 class Usuarios(AbstractUser):
+    rol = models.IntegerField(default=1) # 1 para usuarios 2 para propietarios y 3 para administradores
     
-    class Meta:
+    class Meta:    
         verbose_name='Usuario'
         verbose_name_plural='Usuarios'
         db_table='usuarios'
@@ -27,11 +28,12 @@ class Solicitudes(models.Model):
     fecha_de_solicitud = models.DateField(auto_now_add=True, null=True)
     nombre = models.CharField(max_length=20)
     apellidos = models.CharField(max_length=60)
-    rut = models.IntegerField(default=0)
+    rut = models.CharField(max_length=12)
     categoria = models.CharField(max_length=60, default=None)
     nombrePyme = models.CharField(max_length=100)
     solicitud = models.CharField(max_length=500)
     imagen = models.ImageField(upload_to='logoPymesSoli', null=True)
+    idSolicitante = models.IntegerField(null=True, default=None)
     
     class Meta:
         verbose_name='Solicitud'

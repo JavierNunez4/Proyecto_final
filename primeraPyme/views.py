@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .forms import ProductoFrom
 from django.views.generic import View
 from django.http import HttpResponseRedirect
-from mainPage.models import Productos
+from mainPage.models import Productos, Propietarios, Pymes
 from django.urls import reverse
 
 
@@ -23,16 +23,26 @@ class GuardarProducto(View):
             "form": form
         })
         
+        
+        
     def post(self, request):
         form = ProductoFrom(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            return redirect('gestion:pyme1')
+        py = Pymes.objects.all()
+        p = Propietarios.objects.all()
+        if request.user.is_authenticated:
+            userRol = request.user.rol
+            if form.is_valid():
+                form.save()
+                return redirect('gestion:pyme1')
+            data = {"user":userRol}
+            return render(request, "primeraPyme/snakedreams.html", data)
+        
+        
+    
         
         
 
 
 def detalles(request, pk):
     producto = get_object_or_404(Productos, pk=pk)
-   
     return render(request, "primeraPyme/producto.html", {'producto': producto})

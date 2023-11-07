@@ -4,7 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from .forms import CustomUserCreationForm, AddPymeForm, Login
 from django.contrib.auth.decorators import login_required
-from .models import Usuarios, Pymes, Solicitudes
+from .models import Usuarios, Pymes, Solicitudes, Propietarios
 from django.contrib.auth.views import LoginView
 
 # Create your views here.
@@ -12,8 +12,13 @@ from django.contrib.auth.views import LoginView
 
 def main(request):
     pymes = Pymes.objects.all()
-    data = {"img":"imagenes\logo_pyme.jpg"}
-    return render(request, "mainPage/main.html", data)
+    if request.user.is_authenticated:
+        user = request.user.rol
+        data = {"img":"imagenes\logo_pyme.jpg", "u":user}
+        return render(request, "mainPage/main.html", data)
+    else:
+        data = {"img":"imagenes\logo_pyme.jpg"}
+        return render(request, "mainPage/main.html", data)
 
 
 def registrar(request):
@@ -48,7 +53,20 @@ def solicitud(request):
     if request.method == 'POST':
         form = AddPymeForm(request.POST, request.FILES)
         if form.is_valid():
-            soli = form.save()
+            rut = form.cleaned_data['rut']
+            fecha_solicitud = request.POST.get('fecha_de_solicitud')
+            nombre = request.POST.get('nombre')
+            apellidos = request.POST.get('apellidos')
+            rut = request.POST.get('rut')
+            categoria = request.POST.get('categoria')
+            nombre_pyme = request.POST.get('nombrePyme')
+            solicitud = request.POST.get('solicitud')
+            imagen = request.FILES.get('imagen')
+            idUser = request.user.id
+            s = Solicitudes(fecha_de_solicitud=fecha_solicitud, nombre=nombre, apellidos=apellidos, 
+                                      rut=rut, categoria=categoria, nombrePyme=nombre_pyme, solicitud=solicitud,
+                                      imagen=imagen, idSolicitante=idUser)
+            s.save()
             messages.success(request, f'Solicitud Enviada')
             return redirect('main:main')
         
@@ -71,11 +89,13 @@ def rechazar(request,pk):
 
 def aceptar(request,pk):
     soli = get_object_or_404(Solicitudes, pk=pk)
-    guardar = Pymes(nombrePyme=soli.nombrePyme, categoria=soli.categoria, imagen=soli.imagen)
-    guardar.save()
-    soli.delete()
-    
-    return redirect("main:solicitudAdmin")
+    if request.user.is_authenticated:
+        guardarUsuario = Propietarios(nombrePyme = soli.nombrePyme, datosPropietario_id = soli.idSolicitante)
+        guardarUsuario.save()
+        guardar = Pymes(nombrePyme=soli.nombrePyme, categoria=soli.categoria, imagen=soli.imagen, propietario_id = guardarUsuario.id)
+        guardar.save()
+        soli.delete()
+        return redirect("main:solicitudAdmin")
 
 
 def soliDetalles(request, pk):
@@ -85,10 +105,10 @@ def soliDetalles(request, pk):
 
 
 class login(LoginView):
-    form_class = Login # Puedes personalizar el formulario de autenticación si es necesario
-    template_name = 'mainPage/login.html'  # Puedes especificar tu propia plantilla de inicio de sesión
+    form_class = Login 
+    template_name = 'mainPage/login.html'  
 
-    # Aquí puedes agregar cualquier lógica personalizada que desees para el inicio de sesión
+    # agregar lógica personalizada para el inicio de sesión
     def form_valid(self, form):
         # Realizar acciones personalizadas aquí si el formulario es válido
         return super().form_valid(form)
@@ -96,3 +116,9 @@ class login(LoginView):
     def form_invalid(self, form):
         # Realizar acciones personalizadas aquí si el formulario es inválido
         return super().form_invalid(form)
+    
+    
+
+
+def error404(request, exception):
+    return render(request, '/error404.html', status=404)

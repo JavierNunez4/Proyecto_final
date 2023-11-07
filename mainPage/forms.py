@@ -19,7 +19,7 @@ class CustomUserCreationForm(UserCreationForm):
 class AddPymeForm(forms.ModelForm):
     nombre = forms.CharField(label='Nombre',widget=forms.TextInput(attrs={"class":"form-control"}), max_length=35)
     apellidos = forms.CharField(label='Apellidos', widget=forms.TextInput(attrs={"class":"form-control"}), max_length=35)
-    rut = forms.CharField(label='Rut Empresa', widget=forms.TextInput(attrs={"class":"form-control"}), max_length=9)
+    rut = forms.CharField(label='Rut Empresa', widget=forms.TextInput(attrs={"class":"form-control"}), max_length=12)
     nombrePyme = forms.CharField(label='Nombre de su Pyme', widget=forms.TextInput(attrs={"class":"form-control"}), max_length=35)
     categoria = forms.CharField(label='Categoria de su Pyme', widget=forms.TextInput(attrs={"class":"form-control"}), max_length=35)
     solicitud = forms.CharField(label='Descripcion de solicitud' ,widget=forms.Textarea(attrs={"class":"form-control"}), max_length=250)
