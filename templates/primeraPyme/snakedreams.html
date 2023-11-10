@@ -32,7 +32,7 @@
 
 {% if user.rol == 2%}
 <div class="modal-footer" >
-    <a class="btn btn-primary" href="crear">Agregar un Producto</a>
+    <a class="btn btn-primary" href="{% url 'gestion:agregarProducto' %}">Agregar un Producto</a>
     </div>
 {% endif %}
 

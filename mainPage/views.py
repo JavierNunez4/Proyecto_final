@@ -48,7 +48,6 @@ def cuentaUser(request):
         return redirect('main:login')
     
     
-
 def solicitud(request):
     if request.method == 'POST':
         form = AddPymeForm(request.POST, request.FILES)

@@ -8,7 +8,7 @@ urlpatterns = [
     path("", views.main, name="main"),
     path("registrar/", views.registrar, name="register"),
     path('login/', views.login.as_view(template_name='mainPage/login.html', success_url='/account/'), name="login"),
-    path("logout/", LogoutView.as_view(template_name='mainPage/logout.html',next_page='/login'), name="logout"),
+    path("logout/", LogoutView.as_view(template_name='mainPage/logout.html',next_page='/login/'), name="logout"),
     path("account/", views.cuentaUser, name="account"),
     path("solicitud/", login_required(views.solicitud), name="solicitud"),
     path("adminsolicitud/", login_required(views.solicitudAdmin), name="solicitudAdmin"),
