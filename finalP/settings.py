@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-9imj$(^dq=t=7dn=v35j!ae291vro6=swr78n6x7hssa+ldtoq'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -140,9 +140,10 @@ AUTH_USER_MODEL = 'mainPage.Usuarios'
 
 
 #imagenes guardadas al subirlas
-MEDIA_ROOT = BASE_DIR / "imagenesTienda"
 MEDIA_URL = "/media-imagenesTienda/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "imagenesTienda")
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 #configuracion en la rutas y direcciones del proyecto
 SITE_ID = 1

@@ -14,10 +14,10 @@ def main(request):
     pymes = Pymes.objects.all()
     if request.user.is_authenticated:
         user = request.user.rol
-        data = {"img":"imagenes\logo_pyme.jpg", "u":user}
+        data = { "u":user, "pymes":pymes}
         return render(request, "mainPage/main.html", data)
     else:
-        data = {"img":"imagenes\logo_pyme.jpg"}
+        data = { "pymes":pymes}
         return render(request, "mainPage/main.html", data)
 
 
@@ -47,6 +47,13 @@ def cuentaUser(request):
         
         return redirect('main:login')
     
+
+
+def generar_nombre_unico(nombre_original):
+    import uuid
+    extension = nombre_original.split('.')[-1]
+    nombre_unico = f"{uuid.uuid4().hex}.{extension}"
+    return nombre_unico
     
 def solicitud(request):
     if request.method == 'POST':
@@ -87,10 +94,15 @@ def rechazar(request,pk):
 
 
 def aceptar(request,pk):
+    
     soli = get_object_or_404(Solicitudes, pk=pk)
     if request.user.is_authenticated:
         guardarUsuario = Propietarios(nombrePyme = soli.nombrePyme, datosPropietario_id = soli.idSolicitante)
         guardarUsuario.save()
+        usuario = get_object_or_404(Usuarios, id=soli.idSolicitante)
+        rolAdmin = 2
+        usuario.rol = rolAdmin
+        usuario.save()
         guardar = Pymes(nombrePyme=soli.nombrePyme, categoria=soli.categoria, imagen=soli.imagen, propietario_id = guardarUsuario.id)
         guardar.save()
         soli.delete()

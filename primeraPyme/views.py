@@ -9,9 +9,10 @@ from django.urls import reverse
 # Create your views here.
 
 
-def pyme1(request):
+def pyme1(request, pk):
+    pyme = get_object_or_404(Pymes, pk=pk)
     productos = Productos.objects.all()
-    data = {"img":"imagenes\logo_pyme.jpg", 'productos':productos}
+    data = { 'productos':productos, "pyme":pyme}
     return render(request, "primeraPyme/snakedreams.html",data)
 
 
@@ -33,7 +34,7 @@ class GuardarProducto(View):
             userRol = request.user.rol
             if form.is_valid():
                 form.save()
-                return redirect('gestion:pyme1')
+                return redirect('main:main')
             data = {"user":userRol}
             return render(request, "primeraPyme/snakedreams.html", data)
         
