@@ -8,7 +8,7 @@ from django.urls import reverse
 
 # Create your views here.
 
-
+#vista principal de la pyme
 def pyme1(request, pk):
     pyme = get_object_or_404(Pymes, pk=pk)
     productos = Productos.objects.all()
@@ -16,7 +16,7 @@ def pyme1(request, pk):
     return render(request, "primeraPyme/snakedreams.html",data)
 
 
-
+#funcion basa en clases que permite mostrar y guardar el formulario para agregar productos
 class GuardarProducto(View):
     def get(self, request):
         form = ProductoFrom()
@@ -39,11 +39,7 @@ class GuardarProducto(View):
             return render(request, "primeraPyme/snakedreams.html", data)
         
         
-    
-        
-        
-
-
+#detalles de cada producto
 def detalles(request, pk):
     producto = get_object_or_404(Productos, pk=pk)
     return render(request, "primeraPyme/producto.html", {'producto': producto})

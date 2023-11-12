@@ -26,4 +26,4 @@ urlpatterns = [
     path('', include("mainPage.urls")),
     path("pymes/", include("primeraPyme.urls")),
 
-]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)#configuarion necesaria para cargar imagenes

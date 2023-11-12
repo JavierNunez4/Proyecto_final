@@ -139,13 +139,17 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'mainPage.Usuarios'
 
 
-#imagenes guardadas al subirlas
+#Configuracion necesaria para almacenar imagenes en el directorio del proyecto
 MEDIA_URL = "/media-imagenesTienda/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "imagenesTienda")
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')#esta linea sirve para indicar donde se almacenan los datos estaticos al 
+                                                    #momento de ejecutar un manage.py collectstatic
 
 #configuracion en la rutas y direcciones del proyecto
 SITE_ID = 1
+
+#lugar donde redirecciona el login al ser valido
 LOGIN_REDIRECT_URL = '/account/'
 
