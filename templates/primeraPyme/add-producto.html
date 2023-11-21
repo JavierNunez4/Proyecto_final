@@ -3,6 +3,7 @@
 {% block name %} agregar producto  {% endblock  %}
 
 {% block content %}
+
 <h1 class="ms-5">Agregar Producto</h1>
 <div class="container">
     <form method="post" enctype="multipart/form-data">
@@ -16,6 +17,10 @@
             {{ form.descripcion }}
         </div>
         <div>
+            <label for="id_descripcion" class="col-form-label">Cantidad:</label>
+            {{ form.cantidad }}
+        </div>
+        <div>
             <label for="id_precio" class="col-form-label">Precio:</label>
             {{ form.precio }}
         </div>
@@ -27,6 +32,7 @@
         <div class="modal-footer">
         <Button class="btn btn-primary">Agregar</Button>
         </div>
+        
     </form>
     <br>
     

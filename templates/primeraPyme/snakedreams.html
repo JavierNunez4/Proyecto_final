@@ -9,7 +9,9 @@
 {% block content %}
 
 <div class="row">
+    
     {% for producto in productos %}
+    {% if producto.pymeAsociada_id == pyme.id %}
     <a href="{% url 'gestion:detalle' producto.id %}" style="text-decoration: none; width:auto">
     <div class="col-md-3">
     <div class="card" style="width: 15rem;">
@@ -22,18 +24,24 @@
             <h5 class="card-title">{{ producto.nombreProducto }}</h5>
             <p class="card-text">{{ producto.descripcion }}</p>
             <p class="card-text">Precio: {{ producto.precio }}</p> 
+            <a class="btn btn-primary" >Agregar Al Pedido</a>
         </div>
     </div>
 </div>
 </a>
+
+{% endif %}
     {% endfor %}
+    
 </div>
 </a>
-
-{% if user.rol == 2%}
+{% for p in propie  %}
+{% if user.rol == 2 and pyme.propietario_id == p.id and p.datosPropietario_id == user.id %}
 <div class="modal-footer" >
-    <a class="btn btn-primary" href="{% url 'gestion:agregarProducto' %}">Agregar un Producto</a>
+    <a class="btn btn-primary" href="{% url 'gestion:agregarProducto' pk=pyme.id %}">Agregar un Producto</a>
     </div>
 {% endif %}
+
+{% endfor %}
 
 {% endblock  %}

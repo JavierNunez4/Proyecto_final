@@ -3,13 +3,29 @@
 
 {% block name %} producto {% endblock  %}
 
-{% block title %}<img src="{%static 'imagenes\logo_pyme.jpg' %}" height="3%" width="3%" > <h1>Snake Dreams</h1>{% endblock %}
+
+
+{% block title %}
+
+{% for py in pyme %}
+
+{% if py.id == producto.pymeAsociada_id %}
+<img src="{{ py.imagen.url }}" height="3%" width="3%" > <h1>{{py.nombrePyme}}</h1>
+{% endif %}
+
+{% endfor %}
+
+{% endblock %}
+
+
+
 
 {% block content %}
+
 <img  src="{{ producto.imagen.url }}" width="200px"  height="200px" alt="Imagen del producto">
 <h1>{{producto.nombreProducto}}</h1>
 <h1>{{producto.descripcion}}</h1>
 <h1>{{producto.precio}}</h1>
 
-<a href="{% url 'gestion:pyme1' %}" class="btn btn-danger">Volver</a>
+<a href="{% url 'gestion:pyme' producto.pymeAsociada_id %}" class="btn btn-danger">Volver</a>
 {% endblock  %}
