@@ -64,7 +64,7 @@ class Productos(models.Model):
     pymeAsociada= models.ForeignKey(Pymes,null=True, blank=True, on_delete=models.CASCADE)
     nombreProducto=models.CharField(max_length=35)
     descripcion=models.CharField(max_length=150)
-    precio=models.FloatField()
+    precio=models.DecimalField(max_digits=10, decimal_places=2)
     cantidad=models.IntegerField()
     imagen = models.ImageField(upload_to='imagenesT', null=True)
     
@@ -72,4 +72,35 @@ class Productos(models.Model):
         verbose_name='Producto'
         verbose_name_plural='Productos'
         db_table='productos'
+    
+    
+    
+class Pedido(models.Model):
+    usuario = models.ForeignKey(Usuarios, on_delete=models.CASCADE)
+    productos = models.ManyToManyField(Productos, through='ItemPedido')
+    total = models.DecimalField(max_digits=10, decimal_places=2)
+    creado_en = models.DateTimeField(auto_now_add=True)
+    
+    
+    
+    class Meta:
+        verbose_name='Pedido'
+        verbose_name_plural='Pedidos'
+        db_table='pedidos'
+
+    def __str__(self):
+        return f"Pedido de {self.usuario.username} - {self.creado_en}"
+
+class ItemPedido(models.Model):
+    pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE)
+    producto = models.ForeignKey(Productos, on_delete=models.CASCADE)
+    cantidad = models.PositiveIntegerField(default=1)
+
+    def __str__(self):
+        return f"{self.cantidad} x {self.producto.nombre} en {self.pedido}"
+    
+    class Meta:
+        verbose_name='Detalle_Pedido'
+        verbose_name_plural='Detalle_Pedidos'
+        db_table='pedidos_detalle'
     

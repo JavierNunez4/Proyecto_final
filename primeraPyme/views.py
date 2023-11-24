@@ -1,9 +1,11 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect, HttpResponse
 from .forms import ProductoFrom
 from django.views.generic import View
 from django.http import HttpResponseRedirect
-from mainPage.models import Productos, Propietarios, Pymes
+from mainPage.models import Usuarios,ItemPedido,Pedido,Productos, Propietarios, Pymes
 from django.urls import reverse
+from carro.carro import Carro
+from carro.context_processor import total_carrito
 
 
 
@@ -16,6 +18,8 @@ def pyme1(request, pk):
     productos = Productos.objects.all()
     data = { 'productos':productos, "pyme":pyme, "propie":propietario}
     return render(request, "primeraPyme/snakedreams.html",data)
+
+
 
 
 #funcion basa en clases que permite mostrar y guardar el formulario para agregar productos
@@ -69,3 +73,65 @@ def detalles(request, pk):
 
 # carrito de compras 
 
+def pedidos(request):
+    
+    total_carro = total_carrito(request)["total_carro"]
+    contexto = {
+        # Otros elementos del contexto
+        'total_carro': total_carro,
+    }
+    return render(request, "primeraPyme/pedido.html", contexto)
+
+def agregarCarro(request, producto_id):
+    carro = Carro(request)
+    producto = Productos.objects.get(id =producto_id)
+    carro.agregar(producto)
+    return redirect("main:main")
+
+def eliminarCarro(request, producto_id):
+    carro = Carro(request)
+    producto = Productos.objects.get(id =producto_id)
+    carro.remove(producto)
+    return redirect("main:main")
+
+
+def restarCarro(request, producto_id):
+    carro = Carro(request)
+    producto = Productos.objects.get(id =producto_id)
+    carro.decrement(producto)
+    return redirect("main:main")
+
+def vaciarCarro(request):
+    carro = Carro(request)
+    carro.limpiar()
+    return redirect("main:main")
+
+def agregarPedido(request):
+    carro = Carro(request)
+# Recorrer la lista de productos en el carrito
+    if request.user.is_authenticated:
+        productos_en_carro = carro.carro.values()
+        userid = request.user.id
+        user = Usuarios.objects.get(id=userid)
+        pedido = Pedido(usuario = user, 
+                                total =0)
+        if productos_en_carro:  
+            for producto in productos_en_carro:
+                idProducto = producto["producto_id"]
+                produ = Productos.objects.get(id=idProducto)
+                cantidad = producto["cantidad"]
+                
+                
+                detailPedido = ItemPedido(pedido = pedido,
+                                cantidad = cantidad,
+                                producto = produ)
+                pedido.save()
+                detailPedido.save()
+            return redirect("main:main")
+        
+    
+def detallePedido(request):
+    if request.user.is_authenticated:
+        pedidos = Pedido.objects.all()
+        data = {"pedidos":pedidos}
+        return render(request, "primeraPyme/pedido-usuario.html", data)

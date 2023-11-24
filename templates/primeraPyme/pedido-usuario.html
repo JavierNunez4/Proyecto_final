@@ -1,0 +1,50 @@
+{% extends "base/base.html" %}
+
+{% block name %}
+Historial Pedidos
+{% endblock name %}
+
+{% block title %}
+Historial Pedidos
+{% endblock title %}
+
+{% block style %}
+<style>
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+    
+    td, th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+    
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+    </style>
+{% endblock  %}
+{% block content %}
+<table>   
+        <tr>
+            <th>Nombre</th>
+            <th>Cantidad</th>
+            <th>Estado</th>
+        </tr>
+{% for pedido in pedidos %}
+    {% if request.user.id == pedido.usuario_id %}
+        {% for detalle in pedido.itempedido_set.all %}
+                <tr>
+                    <td>{{ detalle.producto.nombreProducto }}</td>
+                    <td>{{ detalle.cantidad }}</td>
+               
+        {% endfor %}
+    {% endif %}
+{% endfor %}
+<td>Pendiente</td>
+</tr>
+</table>
+{% endblock content %}

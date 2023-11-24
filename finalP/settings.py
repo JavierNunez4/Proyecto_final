@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     #MyApps
     'mainPage',
     'primeraPyme',
+    'carro',
 ]
 
 MIDDLEWARE = [
@@ -68,6 +69,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'carro.context_processor.total_carrito',
             ],
         },
     },
@@ -136,6 +138,8 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
+
+#el modelo de usuarios que sustituye al default de django 
 AUTH_USER_MODEL = 'mainPage.Usuarios'
 
 
