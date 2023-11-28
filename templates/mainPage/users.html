@@ -7,19 +7,50 @@
 {% endblock  %}
 
 
+{% block style %}
+<style>
+    .cuentaUser{
+        height: 100%;
+        width: 100%;
+        border-top: 5px solid;
+
+    }
+    .diseUser{
+        height: 100%;
+        width: 98%;
+        border: 5px solid;
+
+    }
+    h2{
+        margin-bottom: 20px;
+        margin-top: 20px;
+    }
+    </style>
+   
+   
+{% endblock  %}
+
+
 {% block content %}
-<div>
-<h1>Nombre</h1>
-<h5>{{nombre}}</h5>
 
-<h1>Apellido</h1>
-<h5>{{apellido}}</h5>
+<div class="diseUser">
+    <h1>Mi Cuenta</h1>
+    <div class="cuentaUser">
+        <div style="margin: 20px;">
+            <h2>Nombre</h2>
+            <h5>{{ nombre }}</h5>
 
-<h1>Email</h1>
-<h5>{{email}}</h5>
+            <h2>Apellido</h2>
+            <h5>{{ apellido }}</h5>
+
+            <h2>Email</h2>
+            <h5>{{ email }}</h5>
+        </div>
+        <div class="modal-footer">
+            <a style="height: 2.5rem; width: 7rem; margin: 20px;" class="btn btn-dark" href="{% url 'main:logout' %}">Salir</a>
+        </div>
+    </div>
 </div>
 
-<div class="modal-footer" >
-    <a class="btn btn-primary" href="{% url 'main:logout' %}">Salir</a>
-    </div>
+
 {% endblock  %}

@@ -5,7 +5,7 @@ Historial Pedidos
 {% endblock name %}
 
 {% block title %}
-Historial Pedidos
+<h1>Historial Pedidos</h1>
 {% endblock title %}
 
 {% block style %}
@@ -28,23 +28,26 @@ Historial Pedidos
     </style>
 {% endblock  %}
 {% block content %}
-<table>   
+    <table>   
         <tr>
             <th>Nombre</th>
             <th>Cantidad</th>
             <th>Estado</th>
         </tr>
-{% for pedido in pedidos %}
-    {% if request.user.id == pedido.usuario_id %}
-        {% for detalle in pedido.itempedido_set.all %}
-                <tr>
-                    <td>{{ detalle.producto.nombreProducto }}</td>
-                    <td>{{ detalle.cantidad }}</td>
-               
+        {% for pedido in pedidos %}
+            {% if request.user.id == pedido.usuario_id %}
+                {% for detalle in pedido.itempedido_set.all %}
+                    <tr>
+                        <td>{{ detalle.producto.nombreProducto }}</td>
+                        <td>{{ detalle.cantidad }}</td>
+                        <td>...</td>  {# Aquí deberías completar la información del estado #}
+                    </tr>
+                {% endfor %}
+            {% endif %}
+        {% empty %}
+            <tr>
+                <td colspan="3">No hay Pedidos Realizados</td>
+            </tr>
         {% endfor %}
-    {% endif %}
-{% endfor %}
-<td>Pendiente</td>
-</tr>
-</table>
+    </table>
 {% endblock content %}

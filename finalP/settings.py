@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-9imj$(^dq=t=7dn=v35j!ae291vro6=swr78n6x7hssa+ldtoq'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["127.0.0.1"]
 
 
 # Application definition
@@ -84,7 +84,7 @@ WSGI_APPLICATION = 'finalP.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'pruebas_dj',        # Nombre de tu base de datos MySQL
+        'NAME': 'evFinal',        # Nombre de tu base de datos MySQL
         'USER': 'admin_django',            # Nombre de usuario de MySQL
         'PASSWORD': '1234',    # Contraseña de MySQL
         'HOST': 'localhost',         # Host donde se ejecuta MySQL (generalmente 'localhost' en desarrollo)

@@ -1,42 +1,41 @@
 <div class="alert alert-primary" role="alert">
-<table class="table table-bordered">
-<thead>
-    <tr>
-        <th scope="row" colspan="3" class="text-center"> Carro</th>
-           
-    </tr>
-    <tr>
-    <th scope="col">Nombre</th>
-    <th scope="col">Precio</th>
-    <th scope="col">Cantidad</th>
-</tr>
-</thead>
-<tbody>
-    {% if request.session.carro.items %}
-        {% for key, value in request.session.carro.items %}
+    <table class="table table-bordered">
+        <thead>
             <tr>
-                <td>{{ value.nombreProducto }}</td>
-                <td>{{ value.precio }}</td>
-                <td>
-                    {{ value.cantidad }}
-                    <a href="{% url 'gestion:agregarCarro' value.producto_id %}" class="btn btn-dark badge-dark">+</a>
-                    <a href="{% url 'gestion:restarCarro' value.producto_id %}" class="btn btn-dark badge-dark">-</a>
-                </td>
+                <th scope="row" colspan="3" class="text-center">Carro</th>
             </tr>
-        {% endfor %}
-    {% else %}
-        <tr>
-            <td colspan="3">
-                <div class="alert alert-danger text-center">Sin Productos</div>
-            </td>
-        </tr>
-    {% endif %}
-    <tr>
-        <th scope="row">Total:</th>
-        <td colspan="2">$ {{ total_carro }}</td>
-    </tr>
-    </tbody>
-</table>
-<a href="{% url 'gestion:vaciarCarro' %}" class="btn btn-danger">Limpiar</a>
-<a href="{% url 'gestion:agregarPedido' %}" class="btn btn-danger">Guardar</a>
+            <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">Precio</th>
+                <th scope="col">Cantidad</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if request.session.carro.items %}
+                {% for key, value in request.session.carro.items %}
+                    <tr>
+                        <td>{{ value.nombreProducto }}</td>
+                        <td>{{ value.precio }}</td>
+                        <td>
+                            {{ value.cantidad }}
+                            <a href="{% url 'gestion:agregarCarro' value.producto_id %}" class="btn btn-dark badge-dark">+</a>
+                            <a href="{% url 'gestion:restarCarro' value.producto_id %}" class="btn btn-dark badge-dark">-</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="3">
+                        <div class="alert alert-danger text-center">Sin Productos</div>
+                    </td>
+                </tr>
+            {% endif %}
+            <tr>
+                <th scope="row">Total:</th>
+                <td colspan="2">$ {{ total_carro }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <a href="{% url 'gestion:vaciarCarro' %}" class="btn btn-danger">Limpiar</a>
+    <a href="{% url 'gestion:agregarPedido' %}" class="btn btn-danger">Guardar</a>
 </div>

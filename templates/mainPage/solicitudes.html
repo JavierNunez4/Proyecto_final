@@ -28,36 +28,29 @@
 
 
 {% block content %}
-
-<table>
-<tr>
-  
-    <th>fecha de solicitud</th>
-    <th>nombre</th>
-    <th>apellido</th>
-    <th>Rut Empresa</th>
-    <th>nombre Pyme</th>
-    <th>solicitud</th>
-</tr>
-{% for soli in solicitudes  %}
-    <tr>
-  
-    <td>{{soli.fecha_de_solicitud}}</td>
-    <td>{{soli.nombre}}</td>
-    <td>{{soli.apellidos}}</td>
-    <td>{{soli.rut}}</td>
-    <td>{{soli.nombrePyme}}</td>
-    <td>{{soli.solicitud}}</td>
-    <td><a href="{% url 'main:solidetail' soli.id %}"><button class="btn btn-light">Ver solicitud</button></a></td>
-    </tr>
-    
-{% endfor %}
-
-</table>
-
-
-
-
-
-
-{% endblock  %}
+    {% if request.user.rol == 3 %}
+        <table>
+            <tr>
+                <th>fecha de solicitud</th>
+                <th>nombre</th>
+                <th>apellido</th>
+                <th>Rut Empresa</th>
+                <th>nombre Pyme</th>
+                <th>solicitud</th>
+            </tr>
+            {% for soli in solicitudes %}
+                <tr>
+                    <td>{{ soli.fecha_de_solicitud }}</td>
+                    <td>{{ soli.nombre }}</td>
+                    <td>{{ soli.apellidos }}</td>
+                    <td>{{ soli.rut }}</td>
+                    <td>{{ soli.nombrePyme }}</td>
+                    <td>{{ soli.solicitud }}</td>
+                    <td><a href="{% url 'main:solidetail' soli.id %}"><button class="btn btn-light">Ver solicitud</button></a></td>
+                </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        <h1 class="text-align-center d-flex justify-content-center">Error 404</h1>
+    {% endif %}
+{% endblock %}

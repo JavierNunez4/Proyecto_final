@@ -13,7 +13,7 @@
     {% for pyme in pymes  %}
     <div class="col-lg-3">
         <div class="card " style=" width:20rem; height:31rem;">
-            <img src="{{ pyme.imagen.url }}" class="card-img-top">
+            <img src="{{ pyme.imagen.url }}" class="card-img-top" height="100%" width="100%">
             <div class="card-body">
                 <h4 class="card-title text-center">{{ pyme.nombrePyme }}</h4>
                 <br>
@@ -23,15 +23,6 @@
     </div>
     {% endfor %}
 
-
-
-    {% if u == 3 %}
-
-    <div class="modal-footer" >
-        <a class="btn btn-primary" href="{% url 'main:solicitudAdmin' %}">Administrar Solicitudes</a>
-        </div>
-    
-    {% endif %}
     
 
 {%endblock%}

@@ -135,3 +135,5 @@ def detallePedido(request):
         pedidos = Pedido.objects.all()
         data = {"pedidos":pedidos}
         return render(request, "primeraPyme/pedido-usuario.html", data)
+    else:
+        return render(request, "primeraPyme/pedido-usuario.html")

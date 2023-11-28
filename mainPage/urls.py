@@ -12,7 +12,7 @@ urlpatterns = [
     path("logout/", LogoutView.as_view(template_name='mainPage/logout.html',next_page='/login/'), name="logout"),
     path("account/", views.cuentaUser, name="account"),
     path("solicitud/", login_required(views.solicitud), name="solicitud"),
-    path("adminsolicitud/", login_required(views.solicitudAdmin), name="solicitudAdmin"),
+    path("adminsolicitud/", login_required(views.solicitudAdmin, login_url="/login/"), name="solicitudAdmin"),
     path("borrar/<int:pk>", login_required(views.rechazar), name="eliminar"),
     path("solidetail/<int:pk>", login_required(views.soliDetalles), name="solidetail"),
     path("aceptar/<int:pk>", login_required(views.aceptar), name="aceptar"),
