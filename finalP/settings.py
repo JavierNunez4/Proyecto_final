@@ -91,16 +91,12 @@ WSGI_APPLICATION = 'finalP.wsgi.application'
 
 DATABASES = {
     'default': {
-        dj_database_url.config(
-            default='postgresql://postgres:postgres@localhost:/postgres',
-            conn_max_age=600
-        )
-        #'ENGINE': 'django.db.backends.mysql',
-        #'NAME': 'evFinal',        # Nombre de tu base de datos MySQL
-        #'USER': 'admin_django',            # Nombre de usuario de MySQL
-       # 'PASSWORD': '1234',    # Contraseña de MySQL
-        #'HOST': 'localhost',         # Host donde se ejecuta MySQL (generalmente 'localhost' en desarrollo)
-        #'PORT': '3306',              # Puerto de MySQL (generalmente 3306)
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'bvk3t5n1orkpsm6vwltd',        # Nombre de tu base de datos MySQL
+        'USER': 'uai4i3f4t797bdrz',            # Nombre de usuario de MySQL
+        'PASSWORD': 'utqVG4DqfUOwMjS2gSdZ',    # Contraseña de MySQL
+        'HOST': 'bvk3t5n1orkpsm6vwltd-mysql.services.clever-cloud.com',         # Host donde se ejecuta MySQL (generalmente 'localhost' en desarrollo)
+        'PORT': '3306',              # Puerto de MySQL (generalmente 3306)
     }
 }
 
