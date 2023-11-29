@@ -161,11 +161,11 @@ AUTH_USER_MODEL = 'mainPage.Usuarios'
 
 
 #Configuracion necesaria para almacenar imagenes en el directorio del proyecto
-MEDIA_URL = "/imagenesTienda/"
+MEDIA_URL = "/imagenes/"
 
 
 
-MEDIA_ROOT = os.path.join(BASE_DIR, "imagenesTienda")
+MEDIA_ROOT = os.path.join(BASE_DIR, "static/imagenes")
 
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')#esta linea sirve para indicar donde se almacenan los datos estaticos al 
