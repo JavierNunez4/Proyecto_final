@@ -13,9 +13,9 @@ urlpatterns = [
     path("account/", views.cuentaUser, name="account"),
     path("solicitud/", login_required(views.solicitud), name="solicitud"),
     path("adminsolicitud/", login_required(views.solicitudAdmin, login_url="/login/"), name="solicitudAdmin"),
-    path("borrar/<int:pk>", login_required(views.rechazar), name="eliminar"),
-    path("solidetail/<int:pk>", login_required(views.soliDetalles), name="solidetail"),
-    path("aceptar/<int:pk>", login_required(views.aceptar), name="aceptar"),
+    path("borrar/<int:pk>/", login_required(views.rechazar), name="eliminar"),
+    path("solidetail/<int:pk>/", login_required(views.soliDetalles), name="solidetail"),
+    path("aceptar/<int:pk>/", login_required(views.aceptar), name="aceptar"),
     
 ]
 #la funcion login_required agrega la seguridad de que el usuario deba estar logeado para poder ingresar a esa url
